@@ -34,7 +34,7 @@ def search_bing():
 '''for i in range(30):
     search_bing()'''
 
-# Establish TelNet Session to open Firefire so all searches are contained in one tab.
+# Establish TelNet Session to open FireFox so all searches are contained in one tab.
 HOST = 'localhost'
 PORT = 4242
 
@@ -60,7 +60,10 @@ if debug:
     print "Normal Time Format --- %d:%02d:%02d ---" % (hours, minutes, seconds)
 
 if __name__ == "__main__":
-    webbrowser.get('firefox').open_new_tab('http://www.bing.com/')
+    try:
+        webbrowser.get('firefox').open_new_tab('http://www.bing.com/')
+    except:
+        print("FireFox Failed to start...")
     time.sleep(5)
     try:
         for i in range(30):
@@ -68,4 +71,4 @@ if __name__ == "__main__":
             print(str(i+1)+ " queries made...")
         os.system("TASKKILL /F /IM firefox.exe")
     except:
-        print("Connection refused. Please open Mozilla FireFox")
+        print("An error occured while running searches...")

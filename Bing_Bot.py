@@ -30,10 +30,6 @@ def search_bing():
     open_curr_tab('https://www.bing.com/search?q='+words[word1]+'+'+words[word2]+'+'+words[word3])
     print("Done")
 
-
-'''for i in range(30):
-    search_bing()'''
-
 # Establish TelNet Session to open FireFox so all searches are contained in one tab.
 HOST = 'localhost'
 PORT = 4242
@@ -72,3 +68,14 @@ if __name__ == "__main__":
         os.system("TASKKILL /F /IM firefox.exe")
     except:
         print("An error occured while running searches...")
+
+mobile_go = raw_input("Is your Browser set to Mobile? Proceed y/n: ")
+
+if mobile_go == "y" or mobile_go == "yes":
+    for i in range(30):
+        word1 = random.randint(0, len(words))
+        word2 = random.randint(0, len(words))
+        word3 = random.randint(0, len(words))
+        webbrowser.open_new('https://www.bing.com/search?q=' + words[word1] + '+' + words[word2] + '+' + words[word3])
+else:
+    print("Mobile Step Cancelled....")

@@ -52,30 +52,40 @@ if debug:
     run_time = time.time() - start_time
     minutes, seconds = divmod(run_time, 60)
     hours, minutes = divmod(minutes, 60)
-    print "Seconds Time Format --- %s seconds ---" % (time.time() - start_time)
-    print "Normal Time Format --- %d:%02d:%02d ---" % (hours, minutes, seconds)
+    print("Seconds Time Format --- %s seconds ---" % (time.time() - start_time))
+    print("Normal Time Format --- %d:%02d:%02d ---" % (hours, minutes, seconds))
 
 if __name__ == "__main__":
-    try:
-        webbrowser.get('firefox').open_new_tab('http://www.bing.com/')
-    except:
-        print("FireFox Failed to start...")
-    time.sleep(5)
-    try:
-        for i in range(30):
-            search_bing()
-            print(str(i+1)+ " queries made...")
-        os.system("TASKKILL /F /IM firefox.exe")
-    except:
-        print("An error occured while running searches...")
+    iterations = int(raw_input("How many queries do you want to make: "))
+    if iterations != 0:
+        try:
+            webbrowser.get('firefox').open_new_tab('http://www.bing.com/')
+        except:
+            print("FireFox Failed to start...")
+        time.sleep(5)
+        try:
+            for i in range(iterations):
+                search_bing()
+                print(str(i+1)+ " queries made...")
+            os.system("TASKKILL /F /IM firefox.exe")
+        except:
+            print("An error occured while running searches...")
 
 mobile_go = raw_input("Is your Browser set to Mobile? Proceed y/n: ")
 
 if mobile_go == "y" or mobile_go == "yes":
-    for i in range(30):
+    iterations = int(raw_input("How many queries do you want to make: "))
+    for i in range(iterations):
         word1 = random.randint(0, len(words))
         word2 = random.randint(0, len(words))
         word3 = random.randint(0, len(words))
         webbrowser.open_new('https://www.bing.com/search?q=' + words[word1] + '+' + words[word2] + '+' + words[word3])
+        print(str(i + 1) + " queries made...")
+    time.sleep(10)
+    try:
+        os.system("taskkill /F /IM chrome.exe")
+    except OSError:
+        pass
+        print("Chrome Successfully Closed...")
 else:
     print("Mobile Step Cancelled....")

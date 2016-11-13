@@ -83,9 +83,11 @@ if mobile_go == "y" or mobile_go == "yes":
         print(str(i + 1) + " queries made...")
     time.sleep(10)
     try:
-        os.system("taskkill /F /IM chrome.exe")
+        os.system('taskkill /F /IM chrome.exe')
     except OSError:
         pass
         print("Chrome Successfully Closed...")
 else:
     print("Mobile Step Cancelled....")
+
+webbrowser.open_new('https://www.google.com')

@@ -90,4 +90,4 @@ if mobile_go == "y" or mobile_go == "yes":
 else:
     print("Mobile Step Cancelled....")
 
-webbrowser.open_new('https://www.google.com')
+webbrowser.open_new('http://www.bing.com/')

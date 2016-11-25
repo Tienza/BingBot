@@ -67,27 +67,32 @@ if __name__ == "__main__":
             for i in range(iterations):
                 search_bing()
                 print(str(i+1)+ " queries made...")
-            os.system("TASKKILL /F /IM firefox.exe")
+            #os.system("TASKKILL /F /IM firefox.exe")
         except:
             print("An error occured while running searches...")
 
-mobile_go = raw_input("Is your Browser set to Mobile? Proceed y/n: ")
+    correct_input = False
 
-if mobile_go == "y" or mobile_go == "yes":
-    iterations = int(raw_input("How many queries do you want to make: "))
-    for i in range(iterations):
-        word1 = random.randint(0, len(words))
-        word2 = random.randint(0, len(words))
-        word3 = random.randint(0, len(words))
-        webbrowser.open_new('https://www.bing.com/search?q=' + words[word1] + '+' + words[word2] + '+' + words[word3])
-        print(str(i + 1) + " queries made...")
-    time.sleep(10)
-    try:
-        os.system('taskkill /F /IM chrome.exe')
-    except OSError:
-        pass
-        print("Chrome Successfully Closed...")
-else:
-    print("Mobile Step Cancelled....")
+    #mobile_go = raw_input("Is your Browser set to Mobile? Proceed y/n: ")
 
-webbrowser.open_new('http://www.bing.com/')
+    while not correct_input:
+        mobile_go = raw_input("Is your Browser set to Mobile? Proceed y/n: ")
+        if mobile_go == "y" or mobile_go == "yes" or mobile_go == "Yes" or mobile_go == "n" or mobile_go == "no" or mobile_go == "No":
+            correct_input = True
+
+    if mobile_go == "y" or mobile_go == "yes":
+        iterations = int(raw_input("How many queries do you want to make: "))
+        if iterations != 0:
+            try:
+                webbrowser.get('firefox').open_new_tab('http://www.bing.com/')
+            except:
+                print("FireFox Failed to start...")
+            for i in range(iterations):
+                search_bing()
+                print(str(i + 1) + " queries made...")
+            print("Mobile Step Completed...")
+            #time.sleep(10)
+    else:
+        print("Mobile Step Cancelled....")
+
+#webbrowser.open_new('http://www.bing.com/')

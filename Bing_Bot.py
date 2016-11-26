@@ -67,13 +67,12 @@ if __name__ == "__main__":
             for i in range(iterations):
                 search_bing()
                 print(str(i+1)+ " queries made...")
-            #os.system("TASKKILL /F /IM firefox.exe")
         except:
             print("An error occured while running searches...")
 
-    correct_input = False
+        print("")
 
-    #mobile_go = raw_input("Is your Browser set to Mobile? Proceed y/n: ")
+    correct_input = False
 
     while not correct_input:
         mobile_go = raw_input("Is your Browser set to Mobile? Proceed y/n: ")
@@ -83,16 +82,17 @@ if __name__ == "__main__":
     if mobile_go == "y" or mobile_go == "yes":
         iterations = int(raw_input("How many queries do you want to make: "))
         if iterations != 0:
-            try:
-                webbrowser.get('firefox').open_new_tab('http://www.bing.com/')
-            except:
-                print("FireFox Failed to start...")
             for i in range(iterations):
                 search_bing()
                 print(str(i + 1) + " queries made...")
+
+            print("")
             print("Mobile Step Completed...")
-            #time.sleep(10)
+            print("Please switch back to Desktop User Agent if you wish. You have 10 seconds...")
+            time.sleep(10)
+        open_curr_tab('http://www.bing.com/')
     else:
         print("Mobile Step Cancelled....")
+        open_curr_tab('http://www.bing.com/')
 
 #webbrowser.open_new('http://www.bing.com/')

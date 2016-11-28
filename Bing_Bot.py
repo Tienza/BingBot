@@ -2,6 +2,7 @@ import urllib2
 import webbrowser
 import random
 import os
+import platform
 import telnetlib
 import time
 from BeautifulSoup import BeautifulSoup
@@ -9,9 +10,12 @@ from BeautifulSoup import BeautifulSoup
 # Debug Variable
 debug = False
 
-# Registers FireFox as available browser
+# Registers FireFox and Microsoft Edge as available browser
 ffpath = 'C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe'
 webbrowser.register('firefox', None, webbrowser.BackgroundBrowser(ffpath), 1)
+
+mepath = 'edge.bat'
+webbrowser.register('edge', None, webbrowser.BackgroundBrowser(mepath), 2)
 
 # Retrieve Array of Words to use from Long Wikipedia Article
 random_words = urllib2.urlopen('https://en.wikipedia.org/wiki/1918_New_Year_Honours').read()
@@ -48,14 +52,30 @@ def open_curr_tab(url):
 if debug:
     start_time = time.time()
     print(webbrowser._browsers)
+    print(webbrowser._tryorder)
     webbrowser.get('firefox').open('https://www.google.com')
-    run_time = time.time() - start_time
-    minutes, seconds = divmod(run_time, 60)
-    hours, minutes = divmod(minutes, 60)
-    print("Seconds Time Format --- %s seconds ---" % (time.time() - start_time))
-    print("Normal Time Format --- %d:%02d:%02d ---" % (hours, minutes, seconds))
 
 if __name__ == "__main__":
+    # Does a single search on Microsoft Edge to get Edge Points
+    if "Windows" in platform.platform():
+        print("Doing Single Search on Microsoft Edge...")
+        word1 = random.randint(0, len(words))
+        word2 = random.randint(0, len(words))
+        word3 = random.randint(0, len(words))
+        edge_search = 'start microsoft-edge:https://www.bing.com/search?q=' + words[word1] + '+' + words[word2] + '+' + words[word3]
+        if debug:
+            print("Writing edge.bat...")
+        with open('edge.bat', 'w') as edge_bat:
+            edge_bat.writelines(edge_search)
+        webbrowser.get('edge').open_new_tab('http://www.bing.com/')
+        time.sleep(1)
+        if debug:
+            print("Finished used edge.bat...deleting...")
+        os.remove('edge.bat')
+        time.sleep(2)
+        os.system("TASKKILL /F /IM MicrosoftEdge.exe")
+        print("")
+
     iterations = int(raw_input("How many queries do you want to make: "))
     if iterations != 0:
         try:
@@ -96,3 +116,9 @@ if __name__ == "__main__":
         open_curr_tab('http://www.bing.com/')
 
 #webbrowser.open_new('http://www.bing.com/')
+if debug:
+    run_time = time.time() - start_time
+    minutes, seconds = divmod(run_time, 60)
+    hours, minutes = divmod(minutes, 60)
+    print("Seconds Time Format --- %s seconds ---" % (time.time() - start_time))
+    print("Normal Time Format --- %d:%02d:%02d ---" % (hours, minutes, seconds))

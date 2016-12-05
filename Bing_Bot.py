@@ -5,6 +5,7 @@ import os
 import platform
 import telnetlib
 import time
+from unidecode import unidecode
 from BeautifulSoup import BeautifulSoup
 
 # Debug Variable
@@ -27,9 +28,9 @@ print("Length of Array of Words is " + str(len(words)))
 
 # Function to search Bing and acquire points
 def search_bing():
-    word1 = random.randint(0,len(words))
-    word2 = random.randint(0,len(words))
-    word3 = random.randint(0,len(words))
+    word1 = unidecode(random.randint(0,len(words)))
+    word2 = unidecode(random.randint(0,len(words)))
+    word3 = unidecode(random.randint(0,len(words)))
     #webbrowser.open_new('https://www.bing.com/search?q='+words[word1]+'+'+words[word2]+'+'+words[word3])
     open_curr_tab('https://www.bing.com/search?q='+words[word1]+'+'+words[word2]+'+'+words[word3])
     print("Done")
@@ -59,9 +60,9 @@ if __name__ == "__main__":
     # Does a single search on Microsoft Edge to get Edge Points
     if "Windows" in platform.platform():
         print("Doing Single Search on Microsoft Edge...")
-        word1 = random.randint(0, len(words))
-        word2 = random.randint(0, len(words))
-        word3 = random.randint(0, len(words))
+        word1 = unidecode(random.randint(0, len(words)))
+        word2 = unidecode(random.randint(0, len(words)))
+        word3 = unidecode(random.randint(0, len(words)))
         edge_search = 'start microsoft-edge:https://www.bing.com/search?q=' + words[word1] + '+' + words[word2] + '+' + words[word3]
         if debug:
             print("Writing edge.bat...")
@@ -99,7 +100,7 @@ if __name__ == "__main__":
         if mobile_go == "y" or mobile_go == "yes" or mobile_go == "Yes" or mobile_go == "n" or mobile_go == "no" or mobile_go == "No":
             correct_input = True
 
-    if mobile_go == "y" or mobile_go == "yes":
+    if mobile_go == "y" or mobile_go == "yes" or mobile_go == "Yes":
         iterations = int(raw_input("How many queries do you want to make: "))
         if iterations != 0:
             for i in range(iterations):

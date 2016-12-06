@@ -28,11 +28,11 @@ print("Length of Array of Words is " + str(len(words)))
 
 # Function to search Bing and acquire points
 def search_bing():
-    word1 = unidecode(random.randint(0,len(words)))
-    word2 = unidecode(random.randint(0,len(words)))
-    word3 = unidecode(random.randint(0,len(words)))
+    word1 = random.randint(0,len(words))
+    word2 = random.randint(0,len(words))
+    word3 = random.randint(0,len(words))
     #webbrowser.open_new('https://www.bing.com/search?q='+words[word1]+'+'+words[word2]+'+'+words[word3])
-    open_curr_tab('https://www.bing.com/search?q='+words[word1]+'+'+words[word2]+'+'+words[word3])
+    open_curr_tab('https://www.bing.com/search?q=' + unidecode(words[word1]) + '+' + unidecode(words[word2]) + '+' + unidecode(words[word3]))
     print("Done")
 
 # Establish TelNet Session to open FireFox so all searches are contained in one tab.
@@ -60,10 +60,10 @@ if __name__ == "__main__":
     # Does a single search on Microsoft Edge to get Edge Points
     if "Windows" in platform.platform():
         print("Doing Single Search on Microsoft Edge...")
-        word1 = unidecode(random.randint(0, len(words)))
-        word2 = unidecode(random.randint(0, len(words)))
-        word3 = unidecode(random.randint(0, len(words)))
-        edge_search = 'start microsoft-edge:https://www.bing.com/search?q=' + words[word1] + '+' + words[word2] + '+' + words[word3]
+        word1 = random.randint(0,len(words))
+		word2 = random.randint(0,len(words))
+		word3 = random.randint(0,len(words))
+        edge_search = 'start microsoft-edge:https://www.bing.com/search?q=' + unidecode(words[word1]) + '+' + unidecode(words[word2]) + '+' + unidecode(words[word3])
         if debug:
             print("Writing edge.bat...")
         with open('edge.bat', 'w') as edge_bat:

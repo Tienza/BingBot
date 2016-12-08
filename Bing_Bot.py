@@ -61,8 +61,8 @@ if __name__ == "__main__":
     if "Windows" in platform.platform():
         print("Doing Single Search on Microsoft Edge...")
         word1 = random.randint(0,len(words))
-		word2 = random.randint(0,len(words))
-		word3 = random.randint(0,len(words))
+        word2 = random.randint(0,len(words))
+        word3 = random.randint(0,len(words))
         edge_search = 'start microsoft-edge:https://www.bing.com/search?q=' + unidecode(words[word1]) + '+' + unidecode(words[word2]) + '+' + unidecode(words[word3])
         if debug:
             print("Writing edge.bat...")

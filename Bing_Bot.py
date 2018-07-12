@@ -59,62 +59,28 @@ if debug:
 if __name__ == "__main__":
     # Does a single search on Microsoft Edge to get Edge Points
     if "Windows" in platform.platform():
-        print("Doing Single Search on Microsoft Edge...")
-        word1 = random.randint(0,len(words))
-        word2 = random.randint(0,len(words))
-        word3 = random.randint(0,len(words))
-        edge_search = 'start microsoft-edge:https://www.bing.com/search?q=' + unidecode(words[word1]) + '+' + unidecode(words[word2]) + '+' + unidecode(words[word3])
-        if debug:
-            print("Writing edge.bat...")
-        with open('edge.bat', 'w') as edge_bat:
-            edge_bat.writelines(edge_search)
-        webbrowser.get('edge').open_new_tab('http://www.bing.com/')
-        time.sleep(1)
-        if debug:
-            print("Finished used edge.bat...deleting...")
-        os.remove('edge.bat')
-        time.sleep(2)
-        os.system("TASKKILL /F /IM MicrosoftEdge.exe")
-        print("")
-
-    iterations = int(raw_input("How many queries do you want to make: "))
-    if iterations != 0:
-        try:
-            webbrowser.get('firefox').open_new_tab('http://www.bing.com/')
-        except:
-            print("FireFox Failed to start...")
-        time.sleep(5)
-        try:
-            for i in range(iterations):
-                search_bing()
-                print(str(i+1)+ " queries made...")
-        except:
-            print("An error occured while running searches...")
-
-        print("")
+        interations = int(raw_input("How many queries do you want to make: "))
+        if interations != 0:
+            print("Doing Search on Microsoft Edge...")
+            for i in range(interations):
+                word1 = random.randint(0,len(words))
+                word2 = random.randint(0,len(words))
+                word3 = random.randint(0,len(words))
+                edge_search = 'start microsoft-edge:https://www.bing.com/search?q=' + unidecode(words[word1]) + '+' + unidecode(words[word2]) + '+' + unidecode(words[word3])
+                if debug:
+                    print("Writing edge.bat...")
+                with open('edge.bat', 'w') as edge_bat:
+                    edge_bat.writelines(edge_search)
+                webbrowser.get('edge').open_new_tab('http://www.bing.com/')
+                time.sleep(1)
+                if debug:
+                    print("Finished used edge.bat...deleting...")
+            os.remove('edge.bat')
+            time.sleep(2)
+            os.system("TASKKILL /IM MicrosoftEdge.exe")
+            print("")
 
     correct_input = False
-
-    while not correct_input:
-        mobile_go = raw_input("Is your Browser set to Mobile? Proceed y/n: ")
-        if mobile_go == "y" or mobile_go == "yes" or mobile_go == "Yes" or mobile_go == "n" or mobile_go == "no" or mobile_go == "No":
-            correct_input = True
-
-    if mobile_go == "y" or mobile_go == "yes" or mobile_go == "Yes":
-        iterations = int(raw_input("How many queries do you want to make: "))
-        if iterations != 0:
-            for i in range(iterations):
-                search_bing()
-                print(str(i + 1) + " queries made...")
-
-            print("")
-            print("Mobile Step Completed...")
-            print("Please switch back to Desktop User Agent if you wish. You have 10 seconds...")
-            time.sleep(10)
-        open_curr_tab('http://www.bing.com/')
-    else:
-        print("Mobile Step Cancelled....")
-        open_curr_tab('http://www.bing.com/')
 
 #webbrowser.open_new('http://www.bing.com/')
 if debug:
